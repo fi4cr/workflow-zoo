@@ -1,0 +1,17 @@
+flowchart TD
+    A[Problem Input] --> B[Colony Initialization]
+    
+    subgraph Path Finding
+        B --> C[Agent Distribution]
+        C --> D[Path Construction]
+    end
+    
+    subgraph Solution Assembly
+        D --> E[Path Integration]
+        E --> F[Solution Evaluation]
+    end
+    
+    F --> G{Convergence Check}
+    G -->|Complete| H[Final Solution]
+    G -->|Incomplete| I[Pheromone Update]
+    I --> C

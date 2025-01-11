@@ -1,0 +1,18 @@
+flowchart TD
+    A[Learning Input] --> B[Initial Assessment]
+    
+    subgraph Profile Management
+        B --> C[Profile Creation]
+        C --> D[Learning Path Design]
+    end
+    
+    subgraph Content Delivery
+        D --> E[Content Adaptation]
+        E --> F[Content Presentation]
+        F --> G[Knowledge Assessment]
+    end
+    
+    G --> H{Performance Evaluation}
+    H -->|Needs Improvement| C
+    H -->|Pass| I[Level Advancement]
+    I --> E

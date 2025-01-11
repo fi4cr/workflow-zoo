@@ -1,0 +1,24 @@
+flowchart TD
+    A[Environmental Trigger] --> B[Ecosystem Initialization]
+    
+    subgraph Sensing Layer
+        B --> C[Input Processing]
+        C --> D[Environmental Analysis]
+    end
+    
+    subgraph Processing Layer
+        D --> E[Data Transformation]
+        E --> F[Pattern Recognition]
+        F --> G[Knowledge Synthesis]
+    end
+    
+    subgraph Adaptation Layer
+        G --> H[Resource Exchange]
+        H --> I[Agent Specialization]
+        I --> J[Self-Organization]
+    end
+    
+    J --> K[Dynamic Equilibrium]
+    K --> L{Stability Check}
+    L -->|Stable| M[Final Solution]
+    L -->|Unstable| H

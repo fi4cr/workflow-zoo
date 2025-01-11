@@ -1,0 +1,18 @@
+flowchart TD
+    A[Complex Task] --> B[Task Analysis]
+    
+    subgraph Expertise Distribution
+        B --> C[Task Decomposition]
+        C --> D[Expert Assignment]
+    end
+    
+    subgraph Knowledge Integration
+        D --> E[Expert Processing]
+        E --> F[Knowledge Synthesis]
+        F --> G[Solution Review]
+    end
+    
+    G --> H{Quality Check}
+    H -->|Needs Refinement| I[Clarification Request]
+    I --> E
+    H -->|Complete| J[Final Solution]

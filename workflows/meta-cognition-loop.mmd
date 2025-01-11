@@ -1,0 +1,19 @@
+flowchart TD
+    A[Task Input] --> B[Initial Processing]
+    
+    subgraph Core Processing
+        B --> C[Task Analysis]
+        C --> D[Solution Generation]
+    end
+    
+    subgraph Meta Monitoring
+        E[Process Observer]
+        E --> F[Pattern Analysis]
+        F --> G{Issue Detection}
+    end
+    
+    G -->|Issues Found| H[Intervention Design]
+    H --> C
+    
+    G -->|No Issues| I[Quality Validation]
+    I --> J[Final Output]

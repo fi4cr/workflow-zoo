@@ -1,0 +1,21 @@
+flowchart TD
+    A[Problem Input] --> B[Initial Setup]
+    
+    subgraph Initialization
+        B --> C[Solution Generation]
+        C --> D[Temperature Setting]
+    end
+    
+    subgraph Annealing Process
+        D --> E[Solution Evaluation]
+        E --> F{Convergence Check}
+        F -->|Not Converged| G[Candidate Generation]
+        G --> H[Candidate Evaluation]
+        H --> I{Acceptance Check}
+        I -->|Accept| J[Solution Update]
+        I -->|Reject| E
+        J --> K[Temperature Reduction]
+        K --> E
+    end
+    
+    F -->|Converged| L[Final Solution]

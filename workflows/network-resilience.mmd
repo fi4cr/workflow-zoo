@@ -1,0 +1,17 @@
+flowchart TD
+    A[Input Task] --> B[Network Distribution]
+    
+    subgraph Resilient Processing
+        B --> C[Primary Path]
+        B --> D[Backup Path A]
+        B --> E[Backup Path B]
+        
+        C --> F[Processing Stage]
+        D --> F
+        E --> F
+    end
+    
+    F --> G[Result Aggregation]
+    G --> H{Health Check}
+    H -->|Success| I[Final Output]
+    H -->|Failure| B

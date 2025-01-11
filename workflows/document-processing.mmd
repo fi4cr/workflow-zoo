@@ -1,0 +1,26 @@
+flowchart TD
+    %% Document Processing Pipeline
+    A[User Input] --> B[Document Split]
+    
+    subgraph Analysis
+        B --> C1[Legal Analysis]
+        B --> C2[Technical Review]
+        B --> C3[Financial Audit]
+        B --> C4[Compliance Check]
+        B --> C5[Risk Analysis]
+    end
+    
+    subgraph Aggregation
+        C1 --> D[Conflict Detection]
+        C2 --> D
+        C3 --> D
+        C4 --> D
+        C5 --> D
+        D --> E[Issue Aggregation]
+    end
+    
+    E --> F{Resolution Needed?}
+    F -->|Yes| G[Expert Review]
+    G --> H[Resolution Process]
+    H --> B
+    F -->|No| I[Final Solution]

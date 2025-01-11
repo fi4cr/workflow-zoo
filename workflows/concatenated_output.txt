@@ -1,0 +1,272 @@
+
+==================================================
+File: adaptive-learning-pathways.mmd
+==================================================
+
+flowchart TD
+    A[User Input] --> B[Learning Assessment]
+    B --> C[Profile Creation]
+    C --> D[Content Adaptation]
+    D --> E[Content Delivery]
+    E --> F[Knowledge Validation]
+    F -->|Feedback| G{Performance Check}
+    G -->|Needs Adjustment| C
+    G -->|Satisfactory| H[Next Level]
+    H --> D
+
+
+==================================================
+File: ant-colony-optimization.mmd
+==================================================
+
+flowchart TD
+    A[Input Task / Global Problem] --> B[Initialize Ant Agents]
+    
+    B --> C1[Ant 1: Path Construction]
+    B --> C2[Ant 2: Path Construction]
+    B --> C3[Ant 3: Path Construction]
+    
+    subgraph Parallel Ants
+        direction TB
+        C1
+        C2
+        C3
+    end
+    
+    C1 --> D[Merge/Assemble Partial Solutions]
+    C2 --> D
+    C3 --> D
+    
+    D --> E[Evaluate Solutions]
+    E --> F{Convergence Check?}
+    
+    F -->|Yes| G[Final Output]
+    F -->|No| H[Update Pheromones]
+    
+    H --> B
+
+
+==================================================
+File: dynamic-debate.mmd
+==================================================
+
+flowchart TD
+    A[Input Task/Question] --> B[Split Views]
+    B --> C[Proponent LLM]
+    B --> D[Opponent LLM]
+    C -->|Arguments For| E[Referee LLM]
+    D -->|Arguments Against| E
+    E --> F{Evaluation}
+    F --> G[Analysis of Trade-offs]
+    G --> H[Final Recommendation]
+
+
+==================================================
+File: dynamic-task-decomposition.mmd
+==================================================
+
+flowchart TD
+    A[Complex Task] --> B[Analyzer LLM]
+    B --> C{Complexity Assessment}
+    
+    C -->|Simple| D[Direct Solution]
+    C -->|Complex| E[Decomposition]
+    
+    E --> F[Subtask 1]
+    E --> G[Subtask 2]
+    E --> H[Subtask 3]
+    
+    F --> I[Parallel Processing]
+    G --> I
+    H --> I
+    
+    I --> J[Integration LLM]
+    J --> K[Solution Assembly]
+    
+    K --> L{Validation}
+    L -->|Pass| M[Final Output]
+    L -->|Fail| N[Recomposition]
+    N --> B
+    
+    subgraph Task Processing
+        F
+        G
+        H
+    end
+
+
+==================================================
+File: expert-community.mmd
+==================================================
+
+flowchart TD
+    A[Input Task] --> B[Coordinator LLM]
+    
+    B --> C{Task Distribution}
+    
+    C --> D[Expert LLM 1]
+    C --> E[Expert LLM 2]
+    C --> F[Expert LLM 3]
+    
+    D -->|Domain Input| G[Synthesis Phase]
+    E -->|Domain Input| G
+    F -->|Domain Input| G
+    
+    G --> H[Coordinator Review]
+    H -->|Needs Clarification| I[Request Details]
+    I --> D & E & F
+    
+    H -->|Complete| J[Final Output]
+    
+    subgraph Expert Pool
+        D
+        E
+        F
+    end
+
+
+==================================================
+File: hierarchical-decision-making.mmd
+==================================================
+
+flowchart TD
+    A[Complex Problem] --> B[Strategic LLM]
+    B --> C[High-Level Planning]
+    
+    C --> D[Tactical LLM 1]
+    C --> E[Tactical LLM 2]
+    C --> F[Tactical LLM 3]
+    
+    D --> G[Operational LLM 1]
+    D --> H[Operational LLM 2]
+    E --> I[Operational LLM 3]
+    F --> J[Operational LLM 4]
+    
+    G & H & I & J --> K[Integration Layer]
+    K --> L[Strategic Review]
+    L -->|Approve| M[Execute Solution]
+    L -->|Revise| B
+    
+    subgraph Decision Layers
+        direction TB
+        B
+        D & E & F
+        G & H & I & J
+    end
+
+
+==================================================
+File: human-in-the-loop.mmd
+==================================================
+
+flowchart TD
+    A[User Request] --> B[Primary LLM]
+    B --> C[Initial Response]
+    C --> D{Human Review Needed?}
+    D -->|Yes| E[Human Reviewer]
+    E --> F[Provide Feedback]
+    F --> B
+    D -->|No| G[Finalize Output]
+    G --> H[Deliver to User]
+
+
+==================================================
+File: meta-cognition-loop.mmd
+==================================================
+
+flowchart TD
+    A[Input Task] --> B[Primary LLM]
+    B -->|Processing| C[Output/Response]
+    W[Watcher LLM] -->|Monitors| B
+    W -->|Detects Issues| D{Issues Found?}
+    D -->|Yes| E[Intervention]
+    E --> B
+    D -->|No| C
+
+
+==================================================
+File: mixed-mode-orchestration.mmd
+==================================================
+
+flowchart TD
+    A[Input Request] --> B[Task Classifier]
+    B --> C{Pattern Selection}
+    
+    C -->|Simple| D[Prompt Chain]
+    C -->|Complex| E[Evaluator-Optimizer]
+    C -->|Time-Critical| F[Parallelization]
+    
+    D --> G{Results Check}
+    E --> G
+    F --> G
+    
+    G -->|Satisfactory| H[Final Output]
+    G -->|Unsatisfactory| I[Pattern Switch]
+    I --> C
+    
+    subgraph Available Patterns
+        D
+        E
+        F
+    end
+
+
+==================================================
+File: simulated-annealing.mmd
+==================================================
+
+flowchart TD
+    A[User Input] --> B[Initialize Candidate Solution]
+    B --> C[Initialize Temperature (T₀)]
+    C --> D[Evaluate Current Candidate]
+
+    D --> E{Stop Criterion Met?}
+    E -->|Yes| F[Final Solution]
+    E -->|No| G[Propose New Candidate]
+
+    G --> H[Evaluate New Candidate]
+    H --> I[Compute Acceptance Probability (Based on T)]
+
+    I --> J{Accept New?}
+    J -->|Yes| K[Update Candidate Solution]
+    J -->|No| D
+
+    K --> L[Decrease Temperature (T ← α·T)]
+    L --> D
+
+
+==================================================
+File: swarm-intelligence.mmd
+==================================================
+
+flowchart TD
+    A[Global Task] --> B[Swarm Coordinator]
+    
+    B --> C[Agent 1]
+    B --> D[Agent 2]
+    B --> E[Agent 3]
+    B --> F[Agent 4]
+    B --> G[Agent 5]
+    
+    C --> H[Local Processing]
+    D --> H
+    E --> H
+    F --> H
+    G --> H
+    
+    H --> I[Information Sharing]
+    I --> J[Consensus Building]
+    
+    J --> K{Goal Achieved?}
+    K -->|Yes| L[Collective Solution]
+    K -->|No| M[Iterate Process]
+    M --> B
+    
+    subgraph Swarm Agents
+        C
+        D
+        E
+        F
+        G
+    end
+

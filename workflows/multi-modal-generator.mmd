@@ -1,0 +1,29 @@
+flowchart TD
+    %% Multi-Modal Content Generator
+    A[User Input] --> B[Content Planning]
+    
+    subgraph Generation
+        B --> C1[Text Generation]
+        B --> C2[Data Visualization]
+        B --> C3[Code Generation]
+        B --> C4[Interactive Elements]
+    end
+    
+    subgraph Validation
+        C1 --> D1[Style Check]
+        C2 --> D2[Visual Check]
+        C3 --> D3[Code Test]
+        C4 --> D4[UX Check]
+    end
+    
+    subgraph Integration
+        D1 --> E[Integration Layer]
+        D2 --> E
+        D3 --> E
+        D4 --> E
+    end
+    
+    E --> F{Quality Gate}
+    F -->|Fail| G[Revision Loop]
+    G --> B
+    F -->|Pass| H[Final Solution]

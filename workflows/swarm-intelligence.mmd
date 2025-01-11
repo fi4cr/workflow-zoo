@@ -1,0 +1,18 @@
+flowchart TD
+    A[Global Task] --> B[Task Distribution]
+    
+    subgraph Swarm Organization
+        B --> C[Agent Allocation]
+        C --> D[Local Objectives]
+    end
+    
+    subgraph Collective Processing
+        D --> E[Individual Processing]
+        E --> F[Information Exchange]
+        F --> G[Consensus Formation]
+    end
+    
+    G --> H{Goal Assessment}
+    H -->|Achieved| I[Final Solution]
+    H -->|Not Achieved| J[Strategy Update]
+    J --> C

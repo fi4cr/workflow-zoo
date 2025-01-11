@@ -1,0 +1,20 @@
+flowchart TD
+    A[Task Input] --> B[Task Analysis]
+    
+    subgraph Pattern Selection
+        B --> C[Complexity Assessment]
+        C --> D{Execution Strategy}
+    end
+    
+    subgraph Processing Modes
+        D -->|Basic| E[Sequential Processing]
+        D -->|Advanced| F[Optimized Processing]
+        D -->|Urgent| G[Parallel Processing]
+        
+        E & F & G --> H[Result Collection]
+    end
+    
+    H --> I{Quality Validation}
+    I -->|Pass| J[Final Output]
+    I -->|Fail| K[Strategy Adjustment]
+    K --> D

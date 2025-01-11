@@ -1,0 +1,16 @@
+flowchart TD
+    A[Initial Content] --> B[Review Distribution]
+    
+    subgraph Review Process
+        B --> C[Feedback Collection]
+        C --> D[Feedback Analysis]
+    end
+    
+    subgraph Content Revision
+        D --> E[Content Update]
+        E --> F[Quality Check]
+    end
+    
+    F --> G{Validation}
+    G -->|Pass| H[Final Content]
+    G -->|Fail| B

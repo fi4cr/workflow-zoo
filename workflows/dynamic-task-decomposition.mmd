@@ -1,0 +1,28 @@
+flowchart TD
+    A[Complex Task] --> B[Analyzer LLM]
+    B --> C{Complexity Assessment}
+    
+    C -->|Simple| D[Direct Solution]
+    C -->|Complex| E[Decomposition]
+    
+    E --> F[Subtask 1]
+    E --> G[Subtask 2]
+    E --> H[Subtask 3]
+    
+    F --> I[Parallel Processing]
+    G --> I
+    H --> I
+    
+    I --> J[Integration LLM]
+    J --> K[Solution Assembly]
+    
+    K --> L{Validation}
+    L -->|Pass| M[Final Output]
+    L -->|Fail| N[Recomposition]
+    N --> B
+    
+    subgraph Task Processing
+        F
+        G
+        H
+    end

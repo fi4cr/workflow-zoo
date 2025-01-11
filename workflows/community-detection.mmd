@@ -1,0 +1,17 @@
+flowchart TD
+    A[Input Data] --> B[Network Analysis]
+    
+    subgraph Community Detection
+        B --> C[Pattern Recognition]
+        C --> D[Community Formation]
+    end
+    
+    subgraph Processing
+        D --> E[Community A Leader]
+        D --> F[Community B Leader]
+        E --> G[Community Processing]
+        F --> G
+    end
+    
+    G --> H[Result Integration]
+    H --> I[Final Output]

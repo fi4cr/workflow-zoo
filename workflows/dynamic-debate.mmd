@@ -1,0 +1,18 @@
+flowchart TD
+    A[Debate Topic] --> B[Position Analysis]
+    
+    subgraph Argument Generation
+        B --> C[Proponent View]
+        B --> D[Opponent View]
+        C --> E[Argument Synthesis]
+        D --> E
+    end
+    
+    subgraph Evaluation Process
+        E --> F[Argument Analysis]
+        F --> G[Trade-off Assessment]
+    end
+    
+    G --> H{Consensus Check}
+    H -->|Reached| I[Final Conclusion]
+    H -->|Needs Refinement| B

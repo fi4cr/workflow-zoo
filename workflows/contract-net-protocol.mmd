@@ -1,0 +1,16 @@
+flowchart TD
+    A[Task Announcement] --> B[Task Broadcast]
+    
+    subgraph Bidding Process
+        B --> C[Bid Collection]
+        C --> D[Bid Evaluation]
+        D --> E[Winner Selection]
+    end
+    
+    subgraph Task Execution
+        E --> F[Task Assignment]
+        F --> G[Task Processing]
+        G --> H[Result Verification]
+    end
+    
+    H --> I[Final Output]

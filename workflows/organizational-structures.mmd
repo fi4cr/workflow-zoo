@@ -1,0 +1,17 @@
+flowchart TD
+    A[Complex Problem] --> B[Organization Agent]
+    
+    subgraph Role Distribution
+        B --> C[Task Analysis]
+        C --> D[Role Assignment]
+    end
+    
+    subgraph Task Execution
+        D --> E[Specialist Role A]
+        D --> F[Specialist Role B]
+        E --> G[Integration Role]
+        F --> G
+    end
+    
+    G --> H[Solution Assembly]
+    H --> I[Final Output]

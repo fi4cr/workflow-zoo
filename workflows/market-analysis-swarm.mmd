@@ -1,0 +1,28 @@
+flowchart TD
+    A[User Input] --> B[Data Segmentation]
+    
+    subgraph Data Collection
+        B --> C1[Financial Data]
+        B --> C2[Social Media]
+        B --> C3[News Analysis]
+        B --> C4[Competitor Data]
+    end
+    
+    subgraph Analysis
+        C1 --> D1[Trend Detection]
+        C2 --> D2[Sentiment Analysis]
+        C3 --> D3[Event Detection]
+        C4 --> D4[Strategy Analysis]
+    end
+    
+    subgraph Validation
+        D1 --> E[Cross-validation]
+        D2 --> E
+        D3 --> E
+        D4 --> E
+    end
+    E --> F[Risk Assessment]
+    F --> G{Confidence Check}
+    G -->|Low| H[Deep Analysis]
+    H --> B
+    G -->|High| I[Final Solution]

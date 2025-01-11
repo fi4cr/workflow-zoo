@@ -1,0 +1,13 @@
+flowchart TD
+    A[Initial Proposition] --> B[Argument Generation]
+    
+    subgraph Argument Processing
+        B --> C[Proponent Arguments]
+        B --> D[Opponent Arguments]
+        C --> E[Evaluation Agent]
+        D --> E
+    end
+    
+    E --> F{Compelling Case?}
+    F -->|Yes| G[Accepted Proposition]
+    F -->|No| A

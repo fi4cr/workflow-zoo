@@ -1,0 +1,17 @@
+flowchart TD
+    A[Information Input] --> B[Initial Distribution]
+    
+    subgraph Network Layer 1
+        B --> C[Primary Nodes]
+        C --> D[Information Spread]
+    end
+    
+    subgraph Network Layer 2
+        D --> E[Secondary Nodes]
+        E --> F[Extended Spread]
+    end
+    
+    F --> G[Network Coverage]
+    G --> H{Saturation Check}
+    H -->|Complete| I[Information Aggregation]
+    H -->|Incomplete| D

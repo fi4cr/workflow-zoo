@@ -1,0 +1,19 @@
+flowchart TD
+    A[User Input] --> B[Initial Processing]
+    
+    subgraph AI Processing
+        B --> C[Analysis Phase]
+        C --> D[Solution Generation]
+    end
+    
+    subgraph Review Process
+        D --> E{Review Required}
+        E -->|Yes| F[Human Review]
+        F --> G[Feedback Integration]
+        G --> C
+    end
+    
+    E -->|No| H[Quality Assurance]
+    H --> I{Final Check}
+    I -->|Pass| J[Final Output]
+    I -->|Revise| C

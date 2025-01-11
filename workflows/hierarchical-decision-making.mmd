@@ -1,0 +1,22 @@
+flowchart TD
+    A[Complex Problem] --> B[Strategic Analysis]
+    
+    subgraph Strategic Level
+        B --> C[High-Level Planning]
+        C --> D[Strategy Formation]
+    end
+    
+    subgraph Tactical Level
+        D --> E[Task Decomposition]
+        E --> F[Resource Allocation]
+    end
+    
+    subgraph Operational Level
+        F --> G[Task Execution]
+        G --> H[Result Integration]
+    end
+    
+    H --> I[Strategic Review]
+    I --> J{Decision Validation}
+    J -->|Approved| K[Final Solution]
+    J -->|Needs Revision| B
