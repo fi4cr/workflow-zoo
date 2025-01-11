@@ -1,0 +1,28 @@
+{
+  "files": [
+    "adaptive-learning-pathways.mmd",
+    "ant-colony-optimization.mmd",
+    "argumentation-persuasion.mmd",
+    "community-detection.mmd",
+    "contract-net-protocol.mmd",
+    "document-processing.mmd",
+    "dynamic-debate.mmd",
+    "dynamic-task-decomposition.mmd",
+    "expert-community.mmd",
+    "hierarchical-decision-making.mmd",
+    "human-in-the-loop.mmd",
+    "information-diffusion.mmd",
+    "market-analysis-swarm.mmd",
+    "meta-cognition-loop.mmd",
+    "mixed-mode-orchestration.mmd",
+    "multi-modal-generator.mmd",
+    "network-resilience.mmd",
+    "organizational-structures.mmd",
+    "peer-review-revision.mmd",
+    "redundancy-robustness.mmd",
+    "simulated-annealing.mmd",
+    "swarm-intelligence-conceptual.mmd",
+    "swarm-intelligence.mmd",
+    "symbiotic-ecosystems.mmd"
+  ]
+}

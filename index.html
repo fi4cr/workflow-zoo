@@ -108,22 +108,14 @@
 
     async function listMmdFilesInWorkflows() {
       try {
-        const response = await fetch('workflows/');
+        const response = await fetch('workflows.json');
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
-        const directoryListingHtml = await response.text();
-        
-        const parser = new DOMParser();
-        const doc = parser.parseFromString(directoryListingHtml, 'text/html');
-        const links = Array.from(doc.querySelectorAll('a'));
-        
-        return links
-          .map(link => link.getAttribute('href'))
-          .filter(href => href && href.endsWith('.mmd'))
-          .map(href => cleanPath(href));
+        const data = await response.json();
+        return data.files;
       } catch (error) {
-        console.error('Error listing .mmd files:', error);
+        console.error('Error loading workflows.json:', error);
         return [];
       }
     }
@@ -135,7 +127,7 @@
       if (!mmdFiles.length) {
         const errorMsg = document.createElement('div');
         errorMsg.className = 'card error';
-        errorMsg.textContent = 'No .mmd files found in the "workflows" folder, or the folder listing is not accessible.';
+        errorMsg.textContent = 'Failed to load workflow files. Please check the console for more details.';
         mainContainer.appendChild(errorMsg);
         return;
       }
