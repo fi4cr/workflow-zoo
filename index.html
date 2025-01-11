@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Workflow Zoo</title>
+  <!-- Mermaid -->
+  <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <header class="header">
+    <div class="header-content">
+      <h1>Workflow Zoo</h1>
+      <div class="header-controls">
+        <div class="tile-control">
+          <button id="decrease-tiles" aria-label="Decrease tiles">-</button>
+          <button id="increase-tiles" aria-label="Increase tiles">+</button>
+        </div>
+        <button class="theme-toggle" aria-label="Toggle dark mode"></button>
+      </div>
+    </div>
+  </header>
+  
+  <div class="warning-banner collapsed">
+    <div class="warning-banner-header">
+      <span class="warning-banner-title">⚠️ AI-Generated Content Notice</span>
+      <button class="warning-banner-toggle" aria-label="Toggle warning details">▼</button>
+    </div>
+    <div class="warning-banner-content">
+      <p>Please note that all workflows presented in this collection are generated using artificial intelligence. While they may be interesting or inspiring, they should not be taken as authoritative or proven patterns. These are experimental, conceptual workflows that may or may not reflect real-world best practices.</p>
+    </div>
+  </div>
+
+  <div id="main-container"></div>
+
+  <script>
+    // Warning banner toggle functionality
+    const warningBanner = document.querySelector('.warning-banner');
+    const warningToggle = document.querySelector('.warning-banner-toggle');
+    
+    warningBanner.addEventListener('click', (e) => {
+      if (warningBanner.classList.contains('collapsed') || e.target === warningToggle) {
+        warningBanner.classList.toggle('collapsed');
+        warningBanner.classList.toggle('expanded');
+      }
+    });
+  </script>
+
+  <script>
+    // Theme toggle functionality
+    const themeToggle = document.querySelector('.theme-toggle');
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+    
+    // Set initial theme based on system preference or stored preference
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme) {
+      document.documentElement.setAttribute('data-theme', savedTheme);
+    } else if (prefersDark.matches) {
+      document.documentElement.setAttribute('data-theme', 'dark');
+    }
+
+    themeToggle.addEventListener('click', () => {
+      const currentTheme = document.documentElement.getAttribute('data-theme');
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', newTheme);
+      localStorage.setItem('theme', newTheme);
+      
+      // Reset Mermaid instance
+      window.mermaid = undefined;
+      const script = document.createElement('script');
+      script.src = 'https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js';
+      script.onload = () => {
+        // Initialize new Mermaid instance with theme
+        mermaid.initialize({
+          startOnLoad: false,
+          theme: newTheme === 'dark' ? 'dark' : 'default',
+          flowchart: {
+            curve: 'basis',
+            padding: 8
+          },
+          securityLevel: 'loose'
+        });
+        // Clear and reload diagrams
+        const mainContainer = document.getElementById('main-container');
+        mainContainer.innerHTML = '';
+        loadAndRenderAllMmdFiles();
+      };
+      document.head.appendChild(script);
+    });
+
+    mermaid.initialize({
+      startOnLoad: false,
+      theme: document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'default',
+      flowchart: {
+        curve: 'basis',
+        padding: 8
+      },
+      securityLevel: 'loose'
+    });
+
+    function cleanPath(path) {
+      return path.replace(/^\/?(workflows\/)?/, '');
+    }
+
+    async function listMmdFilesInWorkflows() {
+      try {
+        const response = await fetch('workflows/');
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const directoryListingHtml = await response.text();
+        
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(directoryListingHtml, 'text/html');
+        const links = Array.from(doc.querySelectorAll('a'));
+        
+        return links
+          .map(link => link.getAttribute('href'))
+          .filter(href => href && href.endsWith('.mmd'))
+          .map(href => cleanPath(href));
+      } catch (error) {
+        console.error('Error listing .mmd files:', error);
+        return [];
+      }
+    }
+
+    async function loadAndRenderAllMmdFiles() {
+      const mmdFiles = await listMmdFilesInWorkflows();
+      const mainContainer = document.getElementById('main-container');
+
+      if (!mmdFiles.length) {
+        const errorMsg = document.createElement('div');
+        errorMsg.className = 'card error';
+        errorMsg.textContent = 'No .mmd files found in the "workflows" folder, or the folder listing is not accessible.';
+        mainContainer.appendChild(errorMsg);
+        return;
+      }
+
+      for (const fileName of mmdFiles) {
+        const card = document.createElement('div');
+        card.className = 'card';
+
+        const heading = document.createElement('h2');
+        heading.textContent = fileName.replace('.mmd', '').replace(/-/g, ' ');
+        card.appendChild(heading);
+
+        const flowchartDiv = document.createElement('div');
+        flowchartDiv.className = 'flowchart';
+        flowchartDiv.id = `chart-${Math.random().toString(36).substr(2, 9)}`;
+        card.appendChild(flowchartDiv);
+
+        mainContainer.appendChild(card);
+
+        try {
+          const filePath = `workflows/${fileName}`;
+          const response = await fetch(filePath);
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+          }
+          const content = await response.text();
+
+          const pre = document.createElement('pre');
+          pre.className = 'mermaid';
+          const cleanContent = content.trim();
+          pre.textContent = cleanContent.startsWith('flowchart') 
+            ? cleanContent 
+            : `flowchart TD\n${cleanContent}`;
+
+          flowchartDiv.innerHTML = '';
+          flowchartDiv.appendChild(pre);
+        } catch (error) {
+          console.error(`Error loading diagram for ${fileName}:`, error);
+          const errorDiv = document.createElement('div');
+          errorDiv.className = 'error';
+          errorDiv.textContent = `Error loading diagram: ${error.message}`;
+          flowchartDiv.appendChild(errorDiv);
+        }
+      }
+
+      try {
+        await mermaid.run();
+      } catch (error) {
+        console.error('Error initializing Mermaid diagrams:', error);
+        document.querySelectorAll('.flowchart').forEach(flowchart => {
+          if (!flowchart.querySelector('.error')) {
+            const errorDiv = document.createElement('div');
+            errorDiv.className = 'error';
+            errorDiv.textContent = `Error rendering diagram: ${error.message}`;
+            flowchart.appendChild(errorDiv);
+          }
+        });
+      }
+    }
+
+    // Tile control functionality
+    const decreaseTilesBtn = document.getElementById('decrease-tiles');
+    const increaseTilesBtn = document.getElementById('increase-tiles');
+    const mainContainer = document.getElementById('main-container');
+    
+    let currentTiles = 2;
+    const minTiles = 1;
+    const maxTiles = 4;
+
+    function updateTileLayout() {
+      mainContainer.style.gridTemplateColumns = `repeat(${currentTiles}, 1fr)`;
+    }
+
+    decreaseTilesBtn.addEventListener('click', () => {
+      if (currentTiles > minTiles) {
+        currentTiles--;
+        updateTileLayout();
+      }
+    });
+
+    increaseTilesBtn.addEventListener('click', () => {
+      if (currentTiles < maxTiles) {
+        currentTiles++;
+        updateTileLayout();
+      }
+    });
+
+    document.addEventListener('DOMContentLoaded', loadAndRenderAllMmdFiles);
+  </script>
+</body>
+</html>
